@@ -18,7 +18,8 @@ const Input = ({ placeholder, buttonText, onButtonClick }) => {
   return (
     <div className='flex justify-between flex-col items-center w-[40%] gap-3 m-auto '>
         <input className='w-[90%]' onChange={(e)=> setTitle(e.target.value)} placeholder="add a title"/>
-     
+        <input className='w-[90%]'  onChange={(e)=> setContent(e.target.value)} placeholder="add a task"/>
+
     </div>
   )
 }
