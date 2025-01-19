@@ -4,7 +4,10 @@ import { useState } from 'react';
 
 function App() {
   const [title, setTitle] = useState("");
-
+  const [content, setContent] = useState("");
+  const [showEdit, setShowEdit] = useState(true);
+  const [allTodo, setAllTodo] = useState([]);
+  const [editIndex, setEditIndex] = useState(null);
 
   let todoList = {
     title,
