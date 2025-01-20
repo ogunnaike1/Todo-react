@@ -15,9 +15,7 @@ function App() {
   };
 
   const handleClick = () => {
-    setAllTodo([...allTodo, todoList]);
-    setTitle("");
-    setContent("");
+   
   };
 
   const handleDelete = (index) => {
