@@ -15,15 +15,15 @@ function App() {
   };
 
   const handleClick = () => {
-    setAllTodo([...allTodo, todoList]);
-    setTitle("");
+  
     setContent("");
   };
 
   const handleDelete = (index) => {
-    const updatedTodos = [...allTodo];
-    updatedTodos.splice(index, 1);
-    setAllTodo(updatedTodos);
+    const newTodo = allTodo.filter((item)=> item.index !== index)
+    setAllTodo(newTodo)
+    // allTodo.splice(index, 1)
+    // setAllTodo([... allTodo]);
   };
 
   const handleShowEdit = (index) => {
@@ -104,7 +104,7 @@ function App() {
           placeholder="Add a task"
         />
         <button className="bg-red-100 w-[20%]" onClick={handleEdit}>
-          Edit
+          save changes
         </button>
       </div>
 
