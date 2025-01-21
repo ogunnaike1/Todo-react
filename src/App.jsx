@@ -8,19 +8,36 @@ function App() {
   const [showEdit, setShowEdit] = useState(true);
   const [allTodo, setAllTodo] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
+  const [isChecked, setIsChecked] = useState(false);
 
   let todoList = {
     title,
     content,
   };
 
+//   useEffect(() => {
+//   const storedTodos = JSON.parse(localStorage.getItem("localStorageTodo"));
+//   if (storedTodos) {
+//     setAllTodo(storedTodos);
+//   }
+// }, []);
 
-  useEffect(() => {
+
+  const handleCheckedbox = (event) => {
+  const isCheckedNow = event.target.checked;
+
+
+  if (isCheckedNow) {
     const oldTodo = JSON.parse(localStorage.getItem("localStorageTodo"));
     if (oldTodo) {
       setAllTodo(oldTodo);
     }
-  }, []);
+  } else {
+   
+    localStorage.setItem("localStorageTodo", JSON.stringify(allTodo));
+  }
+};
+
 
   const handleClick = () => {
     const updatedTodos = [...allTodo, { title, content }];
@@ -53,6 +70,10 @@ function App() {
     setShowEdit(true)
   }
 
+  const handleCheckbox = () =>{
+
+  }
+
   return (
     <>
       <h1 className="text-[80px] text-red-100 font-[600] text-center mt-[10vh]">
@@ -74,6 +95,7 @@ function App() {
         <button className="bg-red-100 w-[20%]" onClick={handleClick}>
           I Got This
         </button>
+        <input type="checkbox" checked={isChecked}  onChange={handleCheckedbox} name="" id="" />
       </div>
 
       {allTodo.map((items, index) => (
