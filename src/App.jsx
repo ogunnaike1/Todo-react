@@ -24,7 +24,7 @@ function App() {
 
 
   const handleCheckedbox = (event) => {
-  const isCheckedNow = event.target.checked;
+ 
   setIsChecked(isCheckedNow);
 
   if (isCheckedNow) {
