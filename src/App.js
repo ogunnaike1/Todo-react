@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [title, setTitle] = useState("");
@@ -14,15 +14,26 @@ function App() {
     content,
   };
 
+
+  useEffect(() => {
+    const oldTodo = JSON.parse(localStorage.getItem("localStorageTodo"));
+    if (oldTodo) {
+      setAllTodo(oldTodo);
+    }
+  }, []);
+
   const handleClick = () => {
-    setAllTodo([...allTodo, todoList]);
+    const updatedTodos = [...allTodo, { title, content }];
+    setAllTodo(updatedTodos);
+    localStorage.setItem("localStorageTodo", JSON.stringify(updatedTodos));
     setTitle("");
     setContent("");
   };
 
   const handleDelete = (index) => {
-    const newTodo = allTodo.filter((item)=> item.index !== index)
+    const newTodo = allTodo.filter((_, i) => i !== index);
     setAllTodo(newTodo)
+    localStorage.setItem("localStorageTodo", JSON.stringify(newTodo));
     // allTodo.splice(index, 1)
     // setAllTodo([... allTodo]);
   };
@@ -36,7 +47,9 @@ function App() {
 
   const handleEdit = () =>{
     allTodo[editIndex] = {title, content}
-    setAllTodo([...allTodo])
+    const updateTodo = [...allTodo]
+    setAllTodo(updateTodo)
+    localStorage.setItem("localStorageTodo", JSON.stringify(updateTodo));
     setShowEdit(true)
   }
 
