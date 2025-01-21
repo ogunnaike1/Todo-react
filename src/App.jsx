@@ -25,7 +25,7 @@ function App() {
 
   const handleCheckedbox = (event) => {
   const isCheckedNow = event.target.checked;
-
+  setIsChecked(isCheckedNow);
 
   if (isCheckedNow) {
     const oldTodo = JSON.parse(localStorage.getItem("localStorageTodo"));
