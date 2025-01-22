@@ -41,10 +41,7 @@ function App() {
 
   const handleClick = () => {
     const updatedTodos = [...allTodo, { title, content }];
-    setAllTodo(updatedTodos);
-    localStorage.setItem("localStorageTodo", JSON.stringify(updatedTodos));
-    setTitle("");
-    setContent("");
+
   };
 
   const handleDelete = (index) => {
