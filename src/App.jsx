@@ -41,16 +41,11 @@ function App() {
 
   const handleClick = () => {
     const updatedTodos = [...allTodo, { title, content }];
-    setAllTodo(updatedTodos);
-    localStorage.setItem("localStorageTodo", JSON.stringify(updatedTodos));
-    setTitle("");
-    setContent("");
+  
   };
 
   const handleDelete = (index) => {
-    const newTodo = allTodo.filter((_, i) => i !== index);
-    setAllTodo(newTodo)
-    localStorage.setItem("localStorageTodo", JSON.stringify(newTodo));
+
     // allTodo.splice(index, 1)
     // setAllTodo([... allTodo]);
   };
