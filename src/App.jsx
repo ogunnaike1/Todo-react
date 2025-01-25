@@ -45,7 +45,9 @@ function App() {
   };
 
   const handleDelete = (index) => {
-
+    const newTodo = allTodo.filter((_, i) => i !== index);
+    setAllTodo(newTodo)
+    localStorage.setItem("localStorageTodo", JSON.stringify(newTodo));
     // allTodo.splice(index, 1)
     // setAllTodo([... allTodo]);
   };
