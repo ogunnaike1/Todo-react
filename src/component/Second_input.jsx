@@ -1,8 +1,9 @@
 import React from 'react'
 
-const Second_input = ({handleSecondInput}) => {
+const Second_input = ({secondInput, setSecondInput}) => {
+    const [secondInput, setSecondInput] = useState("")
   return (
-   <input onChange={(e)=> handleSecondInput(e.target.value)} type="text" />
+   <input onChange={(e)=> setSecondInput(e.target.value)} type="text" />
   )
 }
 
