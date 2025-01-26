@@ -15,8 +15,7 @@ const Display_button = () => {
     <div>
     <First_input handleFirstInput = {handleFirstInput}/>
     <Second_input handleSecondInput = {handleSecondInput}/>
-        <p>{firstInput}</p>
-        <p>{secondInput}</p>
+     
     </div>
   )
 }
