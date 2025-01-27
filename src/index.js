@@ -26,7 +26,7 @@ root.render(
           <Route path="/home/landing" element={<Landing />} />
           <Route path="/home/count" element={<Count />} />
         </Route>
-        <Route path="/display_button" element={ <Display_button/>} />
+       
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
