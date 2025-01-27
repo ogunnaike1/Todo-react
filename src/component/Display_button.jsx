@@ -3,20 +3,25 @@ import First_input from './First_input'
 import Second_input from './Second_input'
 
 const Display_button = () => {
-    const [firstInput, setFirstInput] = useState("")
-    const [secondInput, setSecondInput] = useState("")
-    const handleFirstInput = (value) =>{
-        setFirstInput(value)
-    }
-    const handleSecondInput = (value) =>{
-        setSecondInput(value)
+    let firstInput;
+    let secondInput;
+    // const [firstInput, setFirstInput] = useState("")
+    // const [secondInput, setSecondInput] = useState("")
+
+    const [displayFirst, setFirstInput] = useState("")
+    const [displaySecond, setSecondInput] = useState("")
+ 
+    const handleDisplay = () =>{
+        setFirstInput(firstInput)
+        setSecondInput(secondInput )
     }
   return (
     <div>
-    <First_input handleFirstInput = {handleFirstInput}/>
-    <Second_input handleSecondInput = {handleSecondInput}/>
-        <p>{firstInput}</p>
-        <p>{secondInput}</p>
+    <First_input firstInput ={firstInput} setFirstInput= {setFirstInput}/>
+    <Second_input  secondInput = {secondInput} setSecondInput={setSecondInput} />
+        <p>{displayFirst}</p>
+        <p>{displaySecond}</p>
+        <button onClick={handleDisplay}>click</button>
     </div>
   )
 }

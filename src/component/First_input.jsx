@@ -1,9 +1,8 @@
 import React from 'react'
 
-const First_input = ({setFirstInput, firstInput}) => {
-    const [firstInput, setFirstInput] = useState("")
+const First_input = ({firstInput, setFirstInput}) => {
   return (
-  <input onChange={(e)=> setFirstInput(e.target.value)} type="text" />
+  <input value={firstInput} onChange={(e)=> setFirstInput(e.target.value)} type="text" />
   )
 }
 
