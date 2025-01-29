@@ -5,11 +5,13 @@ import { Outlet } from 'react-router-dom'
 const Home = () => {
   return (
     <>
+    <div className='flex justify-between'>
      <div className=''>
      <SideNav/>
      </div>
-     <div className=''>
+     <div className=' w-[84%] h-[93vh] '>
      <Outlet/>
+     </div>
      </div>
 
     </>

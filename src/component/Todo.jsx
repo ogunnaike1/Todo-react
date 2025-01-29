@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Todo = () => {
@@ -8,40 +9,30 @@ const Todo = () => {
   const [showEdit, setShowEdit] = useState(true);
   const [allTodo, setAllTodo] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
-  const [isChecked, setIsChecked] = useState(false);
+  const [completed, setCompleted]  = useState(false);
 
   let todoList = {
     title,
     content,
+    completed,
   };
 
-//   useEffect(() => {
-//   const storedTodos = JSON.parse(localStorage.getItem("localStorageTodo"));
-//   if (storedTodos) {
-//     setAllTodo(storedTodos);
-//   }
-// }, []);
-
-
-  const handleCheckedbox = (event) => {
-  const isCheckedNow = event.target.checked;
-  setIsChecked(isCheckedNow);
-
-  if (isCheckedNow) {
-    const oldTodo = JSON.parse(localStorage.getItem("localStorageTodo"));
-    if (oldTodo) {
-      setAllTodo(oldTodo);
-    }
-  } else {
-   
-    localStorage.setItem("localStorageTodo", JSON.stringify(allTodo));
+  useEffect(() => {
+  const storedTodos = JSON.parse(localStorage.getItem("localStorageTodo"));
+  if (storedTodos) {
+    setAllTodo(storedTodos);
   }
-};
+}, []);
+
 
 
   const handleClick = () => {
-    const updatedTodos = [...allTodo, { title, content }];
-  
+    const updatedTodos = [...allTodo, todoList];
+    setAllTodo(updatedTodos); 
+  localStorage.setItem("localStorageTodo", JSON.stringify(updatedTodos));
+
+  setTitle("");  
+  setContent("");
   };
 
   const handleDelete = (index) => {
@@ -67,9 +58,21 @@ const Todo = () => {
     setShowEdit(true)
   }
 
-  const handleCheckbox = () =>{
 
-  }
+
+const handleChecked = (index) => {
+  const updatedTodos = allTodo.map((todo, i) =>
+    i === index ? { ...todo, completed: !todo.completed } : todo
+  );
+
+  setAllTodo(updatedTodos);
+
+  // Filter only completed todos before saving to localStorage
+  
+};
+
+ console.log(allTodo);
+ 
   return (
     <>
       <h1 className="text-[80px] text-red-100 font-[600] text-center mt-[10vh]">
@@ -91,7 +94,6 @@ const Todo = () => {
         <button className="bg-red-100 w-[20%]" onClick={handleClick}>
           I Got This
         </button>
-        <input type="checkbox" checked={isChecked}  onChange={handleCheckedbox} name="" id="" />
       </div>
 
       {allTodo.map((items, index) => (
@@ -111,6 +113,8 @@ const Todo = () => {
             >
               Edit
             </button>
+            <input type="checkbox" checked={items.completed}  onChange={() =>handleChecked(index)} name="" id="" />
+            <Link  to={`/one/${index}`}>see more</Link>
           </div>
         </div>
       ))}
