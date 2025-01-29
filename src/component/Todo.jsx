@@ -69,7 +69,7 @@ const handleChecked = (index) => {
 
   // Filter only completed todos before saving to localStorage
   const completedTodos = updatedTodos.filter(todo => todo.completed);
-
+  localStorage.setItem("localStorageTodo", JSON.stringify(completedTodos));
 };
 
  console.log(allTodo);
