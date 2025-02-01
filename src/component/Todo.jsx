@@ -81,7 +81,9 @@ const handleChecked = (index) => {
       </h1>
       <div className="flex justify-between flex-col items-center w-[40%] gap-3 m-auto">
         <input
-      
+          className="w-[90%]"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           placeholder="Add a title"
         />
         <input
