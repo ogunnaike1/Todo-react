@@ -76,7 +76,7 @@ const handleChecked = (index) => {
  
   return (
     <>
-     
+      <h1 className="text-[80px] text-red-100 font-[600] text-center mt-[10vh]">
         Just do it
       </h1>
       <div className="flex justify-between flex-col items-center w-[40%] gap-3 m-auto">
