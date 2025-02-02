@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Todo from './component/Todo';
@@ -21,15 +21,25 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+
+const MainApp = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const storedAuth = localStorage.getItem("isAuthenticated");
+    if (storedAuth === "true") {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  return(
   <React.StrictMode>
         <BrowserRouter>
-      {/* <Navbar/> */}
+        {isAuthenticated && <Navbar />}
       <Routes>
         <Route path="/" element={ <App />} />
         <Route path="/todo" element={<Todo />} />
-        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/signup" element={<SignUp setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/one/:index" element={<OneTodo/>} />
         <Route path="/home" element={<Home />}>
@@ -46,6 +56,9 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<MainApp />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
