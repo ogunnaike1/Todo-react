@@ -14,6 +14,7 @@ import CourseRegistration from './sqicomponent/CourseRegistration';
 import Resources from './sqicomponent/Resources';
 import RegistrationHistory from './sqicomponent/RegistrationHistory';
 import OneTodo from './component/OneTodo';
+import SignUp from './component/SignUp';
 
 import './index.css';
 
@@ -28,6 +29,7 @@ root.render(
       <Routes>
         <Route path="/" element={ <App />} />
         <Route path="/todo" element={<Todo />} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="*" element={<NotFound />} />
         <Route path="/one/:index" element={<OneTodo/>} />
         <Route path="/home" element={<Home />}>
