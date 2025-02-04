@@ -126,7 +126,7 @@ const Spotify = () => {
                     <span class="sm:block hidden w-[20%]">Album</span>
                     <span class="font-[700] text-[18px] sm:font-[400] sm:text-[16px]">Delete</span>
                 </div>
-                
+                <div class="div-line bg-white h-[1px] mt-[5px] mb-[10px]"></div>
 
                 {data.map((item)=>(
                     
