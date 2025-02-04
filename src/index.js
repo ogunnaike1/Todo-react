@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Todo from './component/Todo';
 import Display_button from './component/Display_button';
+import Login from './component/Login';
 import Navbar from './component/Navbar';
 import Home from './component/Home';
 import NotFound from './component/NotFound';
@@ -15,6 +16,9 @@ import Resources from './sqicomponent/Resources';
 import RegistrationHistory from './sqicomponent/RegistrationHistory';
 import OneTodo from './component/OneTodo';
 import SignUp from './component/SignUp';
+import Http from './component/Http';
+import SeeMore from './component/SeeMore';
+import Spotify from './component/Spotify';
 
 import './index.css';
 
@@ -39,7 +43,11 @@ const MainApp = () => {
       <Routes>
         <Route path="/" element={ <App />} />
         <Route path="/todo" element={<Todo />} />
-        <Route path="/signup" element={<SignUp setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/spotify" element={<Spotify />} />
+        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/http" element={<Http />} />
+        <Route path="/seemore/:id" element={<SeeMore />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/one/:index" element={<OneTodo/>} />
         <Route path="/home" element={<Home />}>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
 
-const SignUp = ({ setIsAuthenticated }) => {
+const SignUp = () => {
     const navigate = useNavigate()
     const [signUPDetails, setSignUPDetails] = useState({
         username:"",
@@ -29,9 +29,8 @@ const SignUp = ({ setIsAuthenticated }) => {
             const updateArray = [...arrayDetails, signUPDetails]
         setArrayDetails(updateArray)
         console.log(updateArray)
-        setIsAuthenticated(true);
         localStorage.setItem("localStorageDetails", JSON.stringify(updateArray));
-        navigate("/home")
+        navigate("/login")
         }
 
       

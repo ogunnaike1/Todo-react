@@ -1,6 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setIsAuthenticated}) => {
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const [signUPDetails, setSignUPDetails] = useState({
+        email:"",
+        password:""
+    });
+    const handleLogin = () =>{
+        const { email, password } = signUPDetails;
+        if(!email || !password){
+            setError("missing detail...fill all input");
+            return;
+        }
+        const storedDetails = JSON.parse(localStorage.getItem("localStorageDetails")) || [];
+        const existingUser = storedDetails.find(user => user.email === email && user.password === password);
+
+        if (existingUser) {
+            navigate("/home")
+            setIsAuthenticated(true);
+        } else {
+        setError("wrong email or password")
+      
+        }
+
+    }
+
+    
   return (
     <div class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
   <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
@@ -13,6 +40,7 @@ const Login = () => {
           type="email" 
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
           placeholder="your@email.com"
+          onChange={(e)=>setSignUPDetails({...signUPDetails, email:e.target.value})}
         />
       </div>
 
@@ -22,6 +50,7 @@ const Login = () => {
           type="password" 
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
           placeholder="••••••••"
+          onChange={(e)=>setSignUPDetails({...signUPDetails, password:e.target.value})}
         />
       </div>
 
@@ -33,7 +62,7 @@ const Login = () => {
         <a href="#" class="text-sm text-indigo-600 hover:text-indigo-500">Forgot password?</a>
       </div>
 
-      <button oncli  class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors">
+      <button  type="button" onClick={handleLogin}  class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors">
         Sign In
       </button>
     </form>
@@ -43,6 +72,7 @@ const Login = () => {
       <a href="#" class="text-indigo-600 hover:text-indigo-500 font-medium">Sign up</a>
     </div>
   </div>
+  <p>{error}</p>
 </div>
   )
 }
