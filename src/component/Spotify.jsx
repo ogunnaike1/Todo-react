@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useRef} from 'react'
 import axios from 'axios'
 
 const Spotify = () => {
@@ -122,38 +122,38 @@ const Spotify = () => {
                 <div class="flex mt-[20px] justify-between text-white">
                     <span class="sm:hidden font-[700] text-[18px] w-[40%]">#  Songs</span>
                     <span class=" sm:block hidden w-[40%]">#  Title</span>
-                    <span class="sm:block hidden w-[20%]">Plays</span>
+                    <span class="sm:block hidden w-[20%]">Release Date</span>
                     <span class="sm:block hidden w-[20%]">Album</span>
                     <span class="font-[700] text-[18px] sm:font-[400] sm:text-[16px]">Delete</span>
                 </div>
                 <div class="div-line bg-white h-[1px] mt-[5px] mb-[10px]"></div>
 
-                {data.map((item)=>(
+                {data.map((item, index)=>(
                     
-                    <div class="div-songlist relative  flex items-center h-[10vh] rounded-[5px]">
-                    <span class="w-[2%]">1</span>
-                    <button class='bg-blue-500 absolute left-[2px]'>
+                    <div class="div-songlist text-white relative border-b-[1px] border-white pt-[15px] pb-[15px] flex items-center h-[10vh] rounded-[5px]">
+                    <span class="w-[2%] ">{1 + index}</span>
+                    <button  class='bg-blue-500 ml-4 absolute left-[2px]'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svgPlay size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
                       </svg>
                       </button>
                     <div class="flex items-center sm:w-[40%] w-[80%] ml-[15px]">
-                    <img class="h-[35px] rounded-[5px]" src="./image/snow.jpg" alt=""></img>
+                    <audio ref={audioRef} src={item.song} />
+                    <img class="h-[40px] w-[40px] ml-[10px] rounded-[5px]" src={item.songImage} alt=""></img>
                         <div class="flex flex-col ml-[10px] leading-5 sm:block ">
-                            <span class="font-[600] text-[15px] sm:text-[18px]">song title</span>
-                            <span>artist name</span>
+                            <span class="font-[600] text-[15px] sm:text-[18px]">{item.songTitle}</span>
+                            <span>{item.artistName}</span>
                         </div>
                         <div class="flex flex-col ml-[10px] leading-5 sm:hidden">
-                            <div class="font-[700] text-[16px] sm:text-[18px]">song title</div>
-                            <div><span>artist name</span><span class=" ml-[10px]">release date</span></div>
+                            <div class="font-[700] text-[16px] sm:text-[18px]">{item.songTitle}</div>
+                            <div><span>{item.artistName}</span><span class=" ml-[10px]">{item.releaseDate}</span></div>
                         </div>
                     </div>
-                    <span class="w-[25%] ml-[20px] sm:block hidden">releae date</span>
-                    <span class="w-[28%] sm:block hidden">album name</span>
+                    <span class="w-[25%] ml-[20px] sm:block hidden">{item.releaseDate}</span>
+                    <span class="w-[28%] sm:block hidden">{item.albumName}</span>
                     <button class="">Delete</button>
              
                 </div>
-
 
                 ))
                     
