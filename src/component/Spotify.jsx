@@ -1,5 +1,6 @@
 import React, { useState,useEffect, useRef} from 'react'
 import axios from 'axios'
+import myImage from "/public/image/"
 
 const Spotify = () => {
   
@@ -61,7 +62,7 @@ const Spotify = () => {
                 
                
                 
-                <button  class="bg-red-500 h-[40px] mt-[10px]">Add to playlist</button>
+                <button  class=" bg-slate-800 h-[40px] mt-[10px]">Add to playlist</button>
 
             </div>
 
