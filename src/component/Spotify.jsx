@@ -1,12 +1,15 @@
 import React, { useState,useEffect, useRef} from 'react'
 import axios from 'axios'
-import myImage from "/public/image/"
+import myImage from "../assets/image/spotify-removebg-preview.png"
 
 const Spotify = () => {
   
     const [data, setData] = useState([])
     const [isLoading, setIsloading] = useState(false)
     const [error, setError] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [currentAudio, setCurrentAudio] = useState(null);
+    const [currentTrack, setCurrentTrack] = useState(null);
 
 
     useEffect(() => {
@@ -26,12 +29,51 @@ const Spotify = () => {
         fecthData()
     
     }, [])
+
    const audioRef = useRef(null);
-        const handlePlay = () => {
+
+        const playAudio = (i) => {
         if (audioRef.current) {
             audioRef.current.play();
         }
         };
+
+    //     const playAudio = (id) =>{
+    //         console.log(id)
+    //         let oneAudio = data.find((e)=> e.id == id)
+    //         console.log( oneAudio)
+
+    //         if (currentTrack === id && isPlaying) {
+    //         pauseAudio();
+    //         return;
+    //     }
+            
+    //         if (currentAudio) {
+    //            currentAudio.pause();
+    //         }
+
+    //         let audio = new Audio(oneAudio.songUrl);
+    //         setCurrentAudio(audio);
+    //         setIsPlaying(true);
+    //         setCurrentTrack(id);
+
+    //         audio.play();
+    //     audio.onended = () => {
+    //         setIsPlaying(false);
+    //         setCurrentTrack(null);
+    //     };
+
+    //     }
+
+    //   const pauseAudio = () => {
+    //     if (currentAudio) {
+    //         currentAudio.pause();
+    //         setIsPlaying(false);
+    //     }
+    // };
+
+
+
 
 
     return (
@@ -93,6 +135,7 @@ const Spotify = () => {
                           </svg>
                           </button>
                         <button class=" bg-black text-white rounded-[50%] h-[30px] w-[30px] text-center flex items-center">
+                        <img src={myImage} alt="" />
                             
                           </button>
                     </div>
@@ -134,18 +177,29 @@ const Spotify = () => {
 
                 {data.map((item, index)=>(
                     
-                    <div class=" text-white relative border-b-[1px] border-white pt-[15px] pb-[15px] flex items-center h-[10vh] rounded-[5px]">
+                    <div  key={item.id} class=" text-white relative border-b-[1px] border-white pt-[15px] pb-[15px] flex items-center h-[10vh] rounded-[5px]">
                     <span class="w-[2%] ">{1 + index}</span>
-                    <button onClick={handlePlay}  class=' bg-slate-600 ml-4 absolute left-[2px]'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svgPlay size-6">
+
+                    <button  onClick={()=>playAudio(index)} class=' bg-slate-600 ml-4 absolute left-[2px]'>
+
+                    {isPlaying?
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                      </svg>
+                      :
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="svgPlay size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
                       </svg>
-                      </button>
+
+                    }
+                    
+
+                    </button>
+                    
+                    
                     <div class="flex items-center sm:w-[40%] w-[80%] ml-[15px]">
-                    <audio ref={audioRef} src={item.songUrl} />
-                    <img class="h-[40px] w-[40px] ml-[10px] rounded-[5px]" src={item.songImage} alt=""></img>
-                        <div class="flex flex-col ml-[10px] leading-5 sm:block ">
-                            <span class="font-[600] text-[15px] sm:text-[18px]">{item.songTitle}</span>
+                    <audio ref={el=> audioRef.current[index] == el} src={item.songUrl} />
+                    
                             <span> - </span>
                             <span>{item.artistName}</span>
                         </div>
@@ -163,10 +217,6 @@ const Spotify = () => {
                 ))
                     
                 }
-
-    
-
-                
                 
                </div>
             </div>
