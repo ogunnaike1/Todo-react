@@ -201,7 +201,9 @@ const Spotify = () => {
                     <audio ref={el=> audioRef.current[index] == el} src={item.songUrl} />
                     <img class="h-[40px] w-[40px] ml-[10px] rounded-[5px]" src={item.songImage} alt=""></img>
                         <div class="flex flex-col ml-[10px] leading-5 sm:block ">
-                
+                            <span class="font-[600] text-[15px] sm:text-[18px]">{item.songTitle}</span>
+                            <span> - </span>
+                            <span>{item.artistName}</span>
                         </div>
                         <div class="flex flex-col ml-[10px] leading-5 sm:hidden">
                             <div class="font-[700] text-[16px] sm:text-[18px]">{item.songTitle}</div>
