@@ -3,6 +3,7 @@ import axios from 'axios'
 import myImage from "../assets/image/spotify-removebg-preview.png"
 
 const Spotify = () => {
+    const audioRef = useRef([]);
   
     const [data, setData] = useState([])
     const [isLoading, setIsloading] = useState(false)
@@ -30,13 +31,41 @@ const Spotify = () => {
     
     }, [])
 
-   const audioRef = useRef(null);
+    const playAudio = (index) => {
+    const currentAudio = audioRef.current[index];
 
-        const playAudio = (i) => {
-        if (audioRef.current) {
-            audioRef.current.play();
-        }
-        };
+    if (currentAudio) {
+      if (isPlaying === index) {
+        currentAudio.pause();
+        setIsPlaying(null);
+      } else {
+        // Pause all other audio elements
+        audioRef.current.forEach((audio, i) => {
+          if (i !== index && audio) {
+            audio.pause();
+            audio.currentTime = 0; // Reset time when paused
+          }
+        });
+
+        currentAudio.play();
+        setIsPlaying(index);
+      }
+    }
+  };
+  const playNext = () => {
+    if (data.length === 0) return;
+
+    let nextIndex = isPlaying !== null ? (isPlaying + 1) % data.length : 0;
+    playAudio(nextIndex);
+  };
+
+  const playBack = () => {
+    if (data.length === 0) return;
+
+    let prevIndex = isPlaying !== null ? (isPlaying - 1 + data.length) % data.length : data.length - 1;
+    playAudio(prevIndex);
+  };
+
 
     //     const playAudio = (id) =>{
     //         console.log(id)
@@ -77,7 +106,7 @@ const Spotify = () => {
 
 
     return (
-        <div>
+        <div className=''>
         <div class="div-drid grid lg:grid-cols-12 md:grid-cols-12 ">
             <div class="lg:col-span-3 md:col-span-4 " >
             <div class="bg-neutral-900 text-[17px] h-[20vh] text-white font-[700] flex  mx-auto flex-col w-[95%] rounded-[10px]">
@@ -101,8 +130,6 @@ const Spotify = () => {
 
             <div class=" bg-neutral-900 text-[17px] h-[70vh] mt-[5px] font-[700] text-white flex  mx-auto flex-col w-[95%] rounded-[10px]">
             
-                
-               
                 
                 <button  class=" bg-slate-800 h-[40px] mt-[10px]">Add to playlist</button>
 
@@ -182,7 +209,7 @@ const Spotify = () => {
 
                     <button  onClick={()=>playAudio(index)} class=' bg-slate-600 ml-4 absolute left-[2px]'>
 
-                    {isPlaying?
+                    {isPlaying === index ?
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
                       </svg>
@@ -192,13 +219,11 @@ const Spotify = () => {
                       </svg>
 
                     }
-                    
-
                     </button>
                     
                     
                     <div class="flex items-center sm:w-[40%] w-[80%] ml-[15px]">
-                    <audio ref={el=> audioRef.current[index] == el} src={item.songUrl} />
+                    <audio ref={el => (audioRef.current[index] = el)} src={item.songUrl} />
                     <img class="h-[40px] w-[40px] ml-[10px] rounded-[5px]" src={item.songImage} alt=""></img>
                         <div class="flex flex-col ml-[10px] leading-5 sm:block ">
                             <span class="font-[600] text-[15px] sm:text-[18px]">{item.songTitle}</span>
@@ -223,6 +248,25 @@ const Spotify = () => {
                </div>
             </div>
         </div>
+
+        <div className='h-[10vh] flex items-center justify-around bg-neutral-900 '>
+        <button onClick={playBack} className='text-white bg-slate-700'>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
+        </svg>
+        </button>
+        
+
+        <button onClick={playNext} className='text-white bg-slate-700'>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />
+        </svg>
+
+        </button>
+
+
+        </div>
+
         </div>
        
   
