@@ -236,7 +236,8 @@ const Spotify = () => {
                         </div>
                     </div>
                     <span class="w-[25%] ml-[20px] sm:block hidden">{item.releaseDate}</span>
-              
+                    <span class="w-[28%] sm:block hidden">{item.albumName}</span>
+                    <button class="">Delete</button>
              
                 </div>
 
