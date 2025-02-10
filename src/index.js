@@ -19,6 +19,7 @@ import SignUp from './component/SignUp';
 import Http from './component/Http';
 import SeeMore from './component/SeeMore';
 import Spotify from './component/Spotify';
+import Formik from './component/Formik';
 
 import './index.css';
 
@@ -47,6 +48,7 @@ const MainApp = () => {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/http" element={<Http />} />
+        <Route path="/formik" element={<Formik />} />
         <Route path="/seemore/:id" element={<SeeMore />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/one/:index" element={<OneTodo/>} />
