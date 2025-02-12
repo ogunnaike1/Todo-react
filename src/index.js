@@ -20,6 +20,8 @@ import Http from './component/Http';
 import SeeMore from './component/SeeMore';
 import Spotify from './component/Spotify';
 import Formik from './component/Formik';
+import { Provider } from 'react-redux';
+import Store from './component/Redux/Store';
 
 import './index.css';
 
@@ -39,6 +41,7 @@ const MainApp = () => {
 
   return(
   <React.StrictMode>
+  <Provider store={Store}>
         <BrowserRouter>
         {isAuthenticated && <Navbar />}
       <Routes>
@@ -64,6 +67,7 @@ const MainApp = () => {
         <Route path="/display_button" element={ <Display_button/>} />
       </Routes>
     </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 }

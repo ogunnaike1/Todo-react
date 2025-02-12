@@ -1,3 +1,22 @@
 {
-    "users":[]
+  "users": [
+    {
+      "id": "c5ed",
+      "username": "usman",
+      "email": "ogunnaikeusman17@gmail.com",
+      "password": "usmanrtrfygu"
+    },
+    {
+      "id": "25c5",
+      "username": "usman",
+      "email": "usman@gmail.com",
+      "password": "gfikhojfijgkjkfgkg"
+    },
+    {
+      "id": "5b09",
+      "username": "usman",
+      "email": "uope@gmail.com",
+      "password": "gfikhojfijgkjkfgkg"
+    }
+  ]
 }
