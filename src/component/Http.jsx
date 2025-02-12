@@ -48,7 +48,9 @@ const Http = () => {
 
         {isLoading ? <p>...loading</p> : 
         data.map((item)=>(
-
+          
+            <input type="checkbox" checked={item.completed ? 'checked' : '' } name="" id="" />
+            <Link to={`/seemore/${item.id}`}>see more</Link>
             </div>
 
         ))
