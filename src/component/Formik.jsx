@@ -12,7 +12,9 @@ const Formik = () => {
 
   const dispatch = useDispatch()
 
-
+  const [isLoading, setIsLoading] = useState(false)
+    const [formDetails, setFormDetails] = useState([])
+  
     useEffect(() => {
       axios
         .get("http://localhost:4008/users")
