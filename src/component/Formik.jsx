@@ -10,7 +10,10 @@ const Formik = () => {
   const {count} = useSelector((state)=> state.countSlice)
   console.log(count);
 
- 
+  const dispatch = useDispatch()
+
+  const [isLoading, setIsLoading] = useState(false)
+    const [formDetails, setFormDetails] = useState([])
   
     useEffect(() => {
       axios
