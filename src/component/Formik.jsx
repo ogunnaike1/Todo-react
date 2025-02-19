@@ -5,27 +5,39 @@ import * as yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import {useDispatch, useSelector} from 'react-redux'
 import { increment, decrease } from './Redux/Counterslice';
+import { isFetching, isSuccessful, isError } from './Redux/Userslice'
 
 const Formik = () => {
   const {count} = useSelector((state)=> state.countSlice)
   console.log(count);
+  const {isLoading, user, error} = useSelector((state)=> state.userSlice)
 
   const dispatch = useDispatch()
 
-  const [isLoading, setIsLoading] = useState(false)
-    const [formDetails, setFormDetails] = useState([])
+  // const [isLoading, setIsLoading] = useState(false)
+  //   const [formDetails, setFormDetails] = useState([])
   
     useEffect(() => {
-      axios
+      try {
+        dispatch(isFetching());
+        axios
         .get("http://localhost:4008/users")
         .then((res) => {
           console.log(res.data); 
-          setFormDetails(res.data);
+          dispatch(isSuccessful(res.data));
+          // setFormDetails(res.data);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log(error);
+          dispatch(isError(error.message));
         });
-    }, [isLoading]);
+        
+      } catch (error) {
+        console.log(error)
+        
+      }
+
+    }, []);
 
     const formik = useFormik({
         initialValues:{
@@ -47,17 +59,20 @@ const Formik = () => {
     // });
   
    
-    const existUser = formDetails.find((user) => user.email === values.email);
+    const existUser =  user.find((item) => item.email === values.email);
     if( existUser){
       console.log("user already exist")
       toast.error("user already existed")
     }else{
-      setIsLoading(true)
+      dispatch(isFetching());
+      // setIsLoading(true)
       axios.post("http://localhost:4008/users", values)
       .then((res)=>{
         console.log(res)
         toast.success("sign up successful")
-        setIsLoading(false)
+    
+        dispatch(isSuccessful([...user, res.data]));
+        // setIsLoading(false)
       })
       .catch((error)=>{
         console.log(error)

@@ -1,24 +1,29 @@
 import React, { useState,useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
+import {useDispatch, useSelector} from 'react-redux'
+import { isFetching, isSuccessful, isError } from './Redux/Userslice'
 
 
 const Http = () => {
     const [data, setData] = useState([])
-    const [isLoading, setIsloading] = useState(false)
-    const [error, setError] = useState(false)
+    // const [isLoading, setIsloading] = useState(false)
+    // const [error, setError] = useState(false)
+    const dispatch = useDispatch()
+    const {isLoading, user, error} = useSelector((state)=> state.userSlice)
+    console.log({isLoading, user, error})
 
     useEffect(() => {
         const fecthData = async()=>{
             try {
-                setIsloading(true)
+                dispatch(isFetching());
                const response = await axios.get(`https://jsonplaceholder.typicode.com/todos/`)
-               setData(response.data)
-               console.log(data)
-               setIsloading(false)
+               dispatch(isSuccessful(response.data));
+               console.log(response.data)
             } catch (error) {
-                setError(error)
+                console.log(error)
+                dispatch(isError(error.message));
+
             }
 
         }
@@ -47,7 +52,7 @@ const Http = () => {
         <h1>API</h1>
 
         {isLoading ? <p>...loading</p> : 
-        data.map((item)=>(
+        user && user.map((item)=>(
             <div key={item.id}>
             <h1>{item.user}</h1>
             <h1>{item.title}</h1>
