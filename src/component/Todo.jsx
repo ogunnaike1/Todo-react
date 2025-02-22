@@ -114,7 +114,8 @@ const handleChecked = (index) => {
             >
               Edit
             </button>
-          
+            <input type="checkbox" checked={items.completed}  onChange={() =>handleChecked(index)} name="" id="" />
+            <Link  to={`/one/${index}`}>see more</Link>
           </div>
         </div>
       ))}
