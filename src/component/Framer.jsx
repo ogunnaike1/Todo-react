@@ -10,7 +10,7 @@ const Framer = () => {
         <motion.button whileHover={{scale:2, originX:0, color:"yellow"}} transition={{type:"spring", stiffness:300}} className='text-blue-500 text-[16px] font-[500] mt-[100px]'>show</motion.button>
     </div>
        
-    </div
+    </div>
 
   )
 }
