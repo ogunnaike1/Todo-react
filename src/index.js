@@ -17,6 +17,7 @@ import RegistrationHistory from './sqicomponent/RegistrationHistory';
 import OneTodo from './component/OneTodo';
 import SignUp from './component/SignUp';
 import Http from './component/Http';
+import Framer from './component/Framer';
 import SeeMore from './component/SeeMore';
 import Spotify from './component/Spotify';
 import Formik from './component/Formik';
@@ -47,6 +48,7 @@ const MainApp = () => {
       <Routes>
         <Route path="/" element={ <App />} />
         <Route path="/todo" element={<Todo />} />
+        <Route path="/framer" element={<Framer />} />
         <Route path="/spotify" element={<Spotify />} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
